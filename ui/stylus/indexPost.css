@@ -1,0 +1,121 @@
+.post-c {
+  display: flex;
+  border-top: 1px dashed #999;
+}
+.post-body {
+  padding-bottom: 50px;
+}
+.post-c-statistics {
+  display: flex;
+}
+.post-more-btn {
+  padding-top: 50px;
+}
+.articles-title {
+  margin-top: -10px;
+  margin-bottom: 80px;
+  text-align: center;
+  display: flex !important;
+  align-items: center;
+}
+.articles-title h1 {
+  color: #666;
+  margin: 0;
+  padding: 0 30px;
+}
+.articles-title-line {
+  flex: 1;
+  height: 1px;
+  border-bottom: 1px dashed #ddd;
+}
+@media (max-width: 767.98px) {
+  .post-c {
+    display: block;
+    padding: 20px 0;
+  }
+  .post-c:first-child {
+    border-top: none !important;
+  }
+  .articles-title {
+    margin-bottom: 0 !important;
+  }
+  .post-c-cover {
+    height: calc((100vw - 40px) / 16 * 9);
+    width: calc(100vw - 40px);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .post-c-cover img {
+    object-fit: cover;
+    height: calc((100vw - 40px) / 16 * 9);
+    width: calc(100vw - 40px);
+    transition: all 0.75s ease;
+  }
+}
+@media (min-width: 768px) {
+  .post-c {
+    margin: 0 -30px;
+  }
+  .post-c:nth-of-type(odd) {
+    flex-direction: row;
+    text-align: right;
+  }
+  .post-c:nth-of-type(even) {
+    flex-direction: row-reverse;
+    text-align: left;
+  }
+  .post-c-cover {
+    margin: -1px 0;
+    height: 256px;
+    width: 256px;
+    overflow: hidden;
+  }
+  .post-c-cover img {
+    object-fit: cover;
+    height: 256px;
+    width: 256px;
+    transition: all 0.75s ease;
+  }
+  .post-c-cover img:hover {
+    transform: scale(1.15);
+  }
+  .post-c-info {
+    flex: 1;
+    padding: 10px 15px;
+  }
+  .post-c-info h1 {
+    margin: 5px 0;
+  }
+  .top-one {
+    position: absolute;
+    display: inline-block;
+    top: 60px;
+    left: -50px;
+    width: 100px;
+    height: 30px;
+    background-color: rgba(0,0,0,0.66);
+    color: rgba(252,252,152,0.88);
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 30px;
+    letter-spacing: 1px;
+    padding-left: 20px;
+    z-index: 5;
+    border-radius: 0 2px 2px 0;
+  }
+  .top-one i {
+    margin: 0 6px;
+  }
+  .top-one:after {
+    position: absolute;
+    content: "";
+    top: 100%;
+    left: 0;
+    border-top: 0 solid transparent;
+    border-right: 20px solid rgba(0,0,0,0.77);
+    border-bottom: 20px solid transparent;
+    border-left: 0 solid transparent;
+    width: 0;
+    height: 0;
+  }
+}

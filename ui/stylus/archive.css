@@ -1,0 +1,54 @@
+.archive-header {
+  text-align: center;
+}
+.archive-header .left,
+.archive-header .line {
+  vertical-align: bottom;
+  display: inline-block;
+  margin: 0;
+  font-size: 2em;
+}
+.archive-header .left {
+  color: #555;
+  padding-right: 0.5em;
+}
+.archive-header .line {
+  height: 1.5em;
+  border-right: 1px dashed #ddd;
+}
+.archive-header .right {
+  vertical-align: bottom;
+  color: #bbb;
+  padding-left: 0.9em;
+  display: inline-block;
+}
+.archive-header .bottom {
+  margin: 1em 0;
+}
+.archive-header .bottom span {
+  display: inline-block;
+}
+.posts-collapse .collection-title {
+  margin: 0 !important;
+}
+.archive-year {
+  margin-left: 28px !important;
+}
+.posts-collapse .post {
+  margin: 0 !important;
+}
+.posts-collapse:after {
+  background: #ddd !important;
+}
+.posts-collapse .collection-title:before,
+.posts-collapse .post-header::before {
+  background: #555 !important;
+}
+.archive-c {
+  padding: 50px 0 50px;
+}
+@media (max-width: 767.98px) {
+  .archive-year {
+    margin-left: 18px !important;
+  }
+}

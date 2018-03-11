@@ -1,0 +1,48 @@
+@media (min-width: 768px) {
+  body {
+    background-color: #fe9;
+    background-image: url("/ui/img/bg01.png");
+    animation: loopBgInfos 15s linear infinite;
+    -webkit-animation: loopBgInfos 15s linear infinite;
+  }
+}
+@-webkit-keyframes loopBgInfos {
+  0% {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 180px -270px;
+  }
+}
+@-moz-keyframes loopBgInfos {
+  0% {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 180px -270px;
+  }
+}
+@-webkit-keyframes loopBgInfos {
+  0% {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 180px -270px;
+  }
+}
+@-o-keyframes loopBgInfos {
+  0% {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 180px -270px;
+  }
+}
+@keyframes loopBgInfos {
+  0% {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 180px -270px;
+  }
+}

@@ -1,0 +1,127 @@
+.header-pc {
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: transparent;
+  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header-pc div {
+  flex-grow: 1;
+}
+.header-pc .left {
+  height: 100%;
+  padding: 0 0 0 75px;
+}
+.header-pc .right {
+  padding: 0 75px 0 0;
+  height: 100%;
+  text-align: right;
+}
+.site-title-c {
+  display: inline-block;
+  color: #fad448;
+  font-size: 26px;
+  line-height: 80px;
+  padding-bottom: 18px;
+}
+.site-title-c ruby {
+  padding: 0 3px;
+  margin: 0 3px;
+  color: #fff;
+  background-color: #fad448;
+  border-radius: 6px;
+}
+.site-nav-c {
+  height: 100%;
+  color: #555;
+}
+.site-nav-c a {
+  padding: 0 15px;
+  border-bottom: none;
+  height: 100%;
+  display: inline-block;
+  line-height: 80px;
+  font-size: 16px;
+}
+.site-nav-c a i {
+  margin-right: 6px;
+}
+.underline-from-center {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px transparent;
+  position: relative;
+  overflow: hidden;
+}
+.underline-from-center:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 50%;
+  right: 50%;
+  bottom: 0;
+  background: #fad448;
+  height: 4px;
+  -webkit-transition-property: left, right;
+  transition-property: left, right;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.underline-from-center:hover:before,
+.underline-from-center:focus:before,
+.hvr-underline-from-center:active:before {
+  left: 0;
+  right: 0;
+}
+.header-pc:hover {
+  background-color: #fff !important;
+}
+.header-blank {
+  width: 100%;
+  background-color: #fff;
+}
+.header-mobile {
+  position: absolute;
+  z-index: 10000;
+}
+.header-mobile i {
+  text-align: center;
+  padding: 8px 10px;
+  font-size: 28px;
+  color: #fff;
+}
+.header-mobile .i-666 {
+  color: #666;
+}
+@media (max-width: 767.98px) {
+  .header-mobile {
+    display: block;
+  }
+  .header-pc {
+    display: none;
+  }
+  .header-blank {
+    display: none;
+  }
+}
+@media (min-width: 768px) {
+  .header-mobile {
+    display: none;
+  }
+  .header-pc {
+    display: flex;
+  }
+  .header-blank {
+    height: 80px;
+  }
+}

@@ -1,0 +1,10 @@
+.post-meta {
+  margin: 0 !important;
+}
+.category-list {
+  text-align: center;
+  margin-bottom: 50px !important;
+}
+.category-list .category-list-item {
+  display: inline-block;
+}

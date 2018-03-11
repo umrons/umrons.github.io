@@ -1,0 +1,52 @@
+.jumbotron {
+  width: 100%;
+  z-index: 1;
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.jumbotron .jbg {
+  z-index: 4;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: none;
+  opacity: 0;
+  transition: all 1s;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.jumbotron:before,
+.jbg:before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(23,24,25,0.3);
+}
+.jumbotron:before {
+  z-index: 2;
+}
+.jbg:before {
+  z-index: 5;
+}
+@media (max-width: 767.98px) {
+  .jumbotron,
+  .jumbotron:before,
+  .jbg,
+  .jbg:before {
+    height: calc(100vw / 16 * 9);
+  }
+}
+@media (min-width: 768px) {
+  .jumbotron,
+  .jumbotron:before,
+  .jbg,
+  .jbg:before {
+    height: 100vh;
+  }
+}

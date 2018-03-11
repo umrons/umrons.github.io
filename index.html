@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-loading-bar.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+<link href="/css/main.css?v=6.0.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.0.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=6.0.4" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.0.4',
+    sidebar: {"position":"left","display":"remove","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+<meta name="description" content="Don&apos;t lose your courage">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Umrons">
+<meta property="og:url" content="https://umrons.me/index.html">
+<meta property="og:site_name" content="Umrons">
+<meta property="og:description" content="Don&apos;t lose your courage">
+<meta property="og:locale" content="zh-CN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Umrons">
+<meta name="twitter:description" content="Don&apos;t lose your courage">
+
+
+
+
+
+
+  <link rel="canonical" href="https://umrons.me/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>Umrons</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome-animation@0.2.0/dist/font-awesome-animation.min.css">
+  
+  
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+  <div id="menu">
+    <div class="slide-menu isMobile">
+  <div class="menu-author">
+    <img src="/images/avatar.png" alt="头像" />
+    <span>Umrons</span>
+  </div>
+  <div class="menu-inner">
+    <div style="padding-bottom: 100px">
+      <a href="/" rel="section">
+        <i class="fas fa-home"></i><span>主页</span>
+      </a>
+      <a href="/categories/" rel="section">
+        <i class="fas fa-th-list"></i><span>分类</span>
+      </a>
+      <a href="/archives/" rel="section">
+        <i class="fas fa-history"></i><span>归档</span>
+      </a>
+      <a href="/about/" rel="section">
+        <i class="fas fa-info"></i><span>关于</span>
+      </a>
+      <a href="https://github.com/umrons" target="_blank">
+        <i class="fab fa-github"></i><span>GitHub</span>
+      </a>
+    </div>      
+  </div>
+</div>
+  </div>
+  <div class="container sidebar-position-left 
+  page-home" id="panel">
+
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="header-pc" id="header-pc">
+  <div class="left">
+    <div class="site-title-c">
+      <ruby class="">UMR<rp>(</rp><rt>umaru</rt><rp>)</rp></ruby>ons
+    </div>
+  </div>
+  <div class="right">  
+    <div class="site-nav-c animated fadeIn">
+      <a href="/" class="underline-from-center faa-parent animated-hover" rel="section">
+        <i class="fas fa-home faa-pulse"></i>主页
+      </a>
+      <a href="/categories/" class="underline-from-center faa-parent animated-hover" rel="section">
+        <i class="fas fa-th-list faa-tada"></i>分类
+      </a>
+      <a href="/archives/" class="underline-from-center faa-parent animated-hover" rel="section">
+        <i class="fas fa-history faa-ring"></i>归档
+      </a>
+      <a href="/about/" class="underline-from-center faa-parent animated-hover" rel="section">
+        <i class="fas fa-info faa-bounce"></i>关于
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="header-mobile">
+  
+  <i class="fas fa-bars toggle-button " aria-hidden="true"></i>
+</div>
+
+<div class="menu-item" style="display:none!important;">
+</div>
+    </header>
+
+    
+      <div class="jumbotron" id="jumbotron">
+  <div class="bg-img-author" id="bgia1">
+    <a class="bg-info" href="#" id="bgi1" target="_blank">
+      <div class="bg-author-img" id="bgai1"></div>
+      <div class="bg-description">
+        <div class="bg-title" id="bgt1"></div>
+        <div class="bg-author-name" id="bgan1"></div>
+      </div>
+    </a>
+  </div>
+  <div class="jbg" id="jbg">
+    <div class="bg-img-author" id="bgia2">      
+      <a class="bg-info" href="#" id="bgi2" target="_blank">
+        <div class="bg-author-img" id="bgai2"></div>
+        <div class="bg-description">
+          <div class="bg-title" id="bgt2"></div>
+          <div class="bg-author-name" id="bgan2"></div>
+        </div>
+      </a>
+    </div>
+  </div>
+  <div class="user-info-pc" id="user">
+    <div class="user-avatar animated fadeIn">
+      <img src="/images/avatar.png" alt="头像" />
+      <div class="border-top">
+        <div class="border-top-inner">
+        </div>
+      </div>
+      <div class="border-bottom">
+        <div class="border-bottom-inner">
+        </div>
+      </div>
+    </div>
+    <div class="animated lightSpeedIn">
+      <span class="user-name growAndFloat">H</span>
+      <span class="user-name growAndFloat">I</span>
+      <span class="user-name growAndFloat">,</span>
+      <span class="user-name growAndFloat">&nbsp;</span>      
+      <span class="user-name growAndFloat">U</span>
+      <span class="user-name growAndFloat">M</span>
+      <span class="user-name growAndFloat">R</span>
+      <span class="user-name growAndFloat">O</span>
+      <span class="user-name growAndFloat">N</span>
+      <span class="user-name growAndFloat">S</span>
+    </div>
+    <div class="user-description">
+      <i class="fas fa-quote-left growAndFloat"></i>
+      Don't lose your courage
+      <i class="fas fa-quote-right growAndFloat"></i>
+    </div>
+  </div>
+  <div class="user-info-mobile">
+    <img src="/images/avatar.png" alt="头像" />
+  </div>
+</div> 
+<div class="isMobile">
+  <div class="user-info-m-name">Umrons</div>
+  <div class="user-info-m-description">
+    <div>
+      <i class="fab fa-github"></i>
+      <a href="https://github.com/umrons" target="_blank">
+        github.com/umrons
+      </a>
+    </div>
+    <div>
+      <i class="fas fa-map-marker-alt"></i>
+      <a href="https://ditu.amap.com/regeo?lng=113.39695&lat=23.053287" target="_blank">
+        广州 · 广州大学城
+      </a>   
+    </div>
+  </div>    
+</div> 
+    
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <div class=" isPC">
+    <div class="notice">
+      <i class="fas fa-bullhorn"></i>
+      <span>请使用 Chrome 浏览器，本博客在 Safari 上部分特效存在问题</span>
+    </div>
+    <div class="plan-title">
+  <i class="fas fa-tasks"></i>
+  <span>近期计划</span>
+</div>
+<div class="plan-inner">
+  <div class="plan-img">
+    <a href="#" target="_blank">
+      <img src="/ui/img/darling.png" alt="plan">
+    </a>
+  </div>
+  <ul>
+    
+    
+    
+      
+      <li>
+        <i class="far fa-square"></i>
+        <span>完善关于页面</span>
+      </li>
+    
+      
+      <li>
+        <i class="far fa-square"></i>
+        <span>更换博客字体</span>
+      </li>
+    
+      
+      <li>
+        <i class="far fa-square"></i>
+        <span>制作友链页面</span>
+      </li>
+    
+      
+      <li>
+        <i class="far fa-square"></i>
+        <span>给博客添加音乐播放器</span>
+      </li>
+    
+  </ul>
+</div>
+  </div>
+  <section id="posts" class="posts-expand">
+  <div class="articles-title isPC">
+    <div class="articles-title-line"></div>
+    <h1>Articles</h1>
+    <div class="articles-title-line"></div>    
+  </div>
+  
+    
+    <div class="isPC animated fadeInUp isSafari">
+          
+      <div class="top-one z-depth-2 fadeIn">
+        <i class="fas fa-bookmark"></i>Top
+      </div>
+      
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://umrons.me/2018/03/11/wow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="umrons">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Umrons">
+    </span>
+
+    
+      <header class="post-header post-header-c" style="background-image: url('/ui/img/umaru0.png')">
+        <div class="post-header-inner">
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a href="/2018/03/11/wow/" itemprop="url">WOW! 新博客上线啦</a></h1>
+        
+
+        <div class="post-meta post-meta-c">
+          <img src="/images/avatar.png" alt="头像" />
+          <span>UMRONS</span>
+          <span class="post-time"></span>
+          <span class="post-meta-divider">·</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar-alt"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-11T01:00:00+08:00">2018-03-11</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">·</span>
+            
+            
+              
+                <span class="post-meta-item-text amend-left">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/blog/" itemprop="url" rel="index"><span itemprop="name">blog</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>现在前端要学的东西越来越多，不把知识点记录下来很快就忘了，所以把博客修改了一番，准备周更</p>
+<h2 id="博客框架"><a href="#博客框架" class="headerlink" title="博客框架"></a>博客框架</h2><p>在动手搭博客之前，我了解了一下目前流行的几个博客框架：<a href="https://wordpress.org" target="_blank" rel="noopener">WordPress</a>、<a href="http://typecho.org" target="_blank" rel="noopener">Typecho</a>、<a href="https://ghost.org/zh_CN/" target="_blank" rel="noopener">Ghost</a>、<a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">Hexo</a></p>
+<p>由于该博客主要执行笔记本的作用，后端基本上不需要了，所以排除了 WordPress、Typecho、ghost <del>反正我也不会</del></p>
+<p>而对于一个略懂前端的博主来说，Hexo 真的很棒，但我认为它的主题制作比较麻烦，尤其是使用 swig 或 ejs 等模版语法，如果换成使用 <a href="https://cn.vuejs.org/v2/guide/" target="_blank" rel="noopener">Vue.js</a> 之类的框架，应该可以大幅提高开发速度，达到更好的体验。所以，下一个博客可能会选择使用 <a href="https://zh.nuxtjs.org/guide/installation" target="_blank" rel="noopener">Nuxt.js</a> 直接搭建</p>
+<h2 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h2><p>主题是基于 <a href="http://theme-next.iissnan.com/getting-started.html#theme-settings" target="_blank" rel="noopener">NexT.Muse</a> 改造的，没想到吧！</p>
+<p>制作时经验值不足，属于自用性质，可设置范围小，即使开源也无意义，但接下来会更新关于本主题制作的教程</p>
+<p>目前还在不断制作中，主题名字为 umaru <del>后面你们会看到大量可爱的小埋</del></p>
+<h2 id="关于主页巨幕"><a href="#关于主页巨幕" class="headerlink" title="关于主页巨幕"></a>关于主页巨幕</h2><p>这是一个自写的插件，原理也很简单。</p>
+<p>上面的图片来自：</p>
+<ul>
+<li><p>番剧的截图</p>
+</li>
+<li><p><strong>开放授权-署名-非商用转载</strong> 协议的插画</p>
+</li>
+</ul>
+<p>注意：本站无论PC端或者移动端均有<strong>标注作者并且设置了超链接</strong>，如果使用了本插件，也请保持这一点。</p>
+<p>而API没有完善，目前还没有余力自建图床或承担图床 cdn 的费用<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/03/11/wow/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    </div>
+    <div class="isMobile animated fadeInUp">
+      <article class="post-c animated fadeInUp">
+  <div class="post-c-cover">        
+    <a href="/2018/03/11/wow/" itemprop="url">
+      <img src="/ui/img/umaru0.png" />
+    </a>
+  </div>
+  <div class="post-c-info">
+    <div class="post-c-date">
+      <i class="far fa-calendar-alt"></i>
+      
+      <time title="更新于" itemprop="dateModified" datetime="2018-03-11T01:00:00+08:00">
+        2018-03-11
+      </time>
+      
+    </div>
+    <div class="post-c-title">  
+      <a href="/2018/03/11/wow/" itemprop="url">
+        <h1>WOW! 新博客上线啦</h1>
+      </a>
+    </div>
+    <div class="post-c-statistics">
+    
+    </div>
+    <span>
+      
+        
+          <p>现在前端要学的东西越来越多，不把知识点记录下来很快就忘了，所以把博客修改了一番，准备周更</p>
+<h2 id="博客框架"><a href="#博客框架" class="headerlink" title="博客框架"></a>博客框架</h2><p>在动手搭博客之前，我了解了一下目前流行的几个博客框架：<a href="https://wordpress.org" target="_blank" rel="noopener">WordPress</a>、<a href="http://typecho.org" target="_blank" rel="noopener">Typecho</a>、<a href="https://ghost.org/zh_CN/" target="_blank" rel="noopener">Ghost</a>、<a href="https://hexo.io/zh-cn/" target="_blank" rel="noopener">Hexo</a></p>
+<p>由于该博客主要执行笔记本的作用，后端基本上不需要了，所以排除了 WordPress、Typecho、ghost <del>反正我也不会</del></p>
+<p>而对于一个略懂前端的博主来说，Hexo 真的很棒，但我认为它的主题制作比较麻烦，尤其是使用 swig 或 ejs 等模版语法，如果换成使用 <a href="https://cn.vuejs.org/v2/guide/" target="_blank" rel="noopener">Vue.js</a> 之类的框架，应该可以大幅提高开发速度，达到更好的体验。所以，下一个博客可能会选择使用 <a href="https://zh.nuxtjs.org/guide/installation" target="_blank" rel="noopener">Nuxt.js</a> 直接搭建</p>
+<h2 id="主题"><a href="#主题" class="headerlink" title="主题"></a>主题</h2><p>主题是基于 <a href="http://theme-next.iissnan.com/getting-started.html#theme-settings" target="_blank" rel="noopener">NexT.Muse</a> 改造的，没想到吧！</p>
+<p>制作时经验值不足，属于自用性质，可设置范围小，即使开源也无意义，但接下来会更新关于本主题制作的教程</p>
+<p>目前还在不断制作中，主题名字为 umaru <del>后面你们会看到大量可爱的小埋</del></p>
+<h2 id="关于主页巨幕"><a href="#关于主页巨幕" class="headerlink" title="关于主页巨幕"></a>关于主页巨幕</h2><p>这是一个自写的插件，原理也很简单。</p>
+<p>上面的图片来自：</p>
+<ul>
+<li><p>番剧的截图</p>
+</li>
+<li><p><strong>开放授权-署名-非商用转载</strong> 协议的插画</p>
+</li>
+</ul>
+<p>注意：本站无论PC端或者移动端均有<strong>标注作者并且设置了超链接</strong>，如果使用了本插件，也请保持这一点。</p>
+<p>而API没有完善，目前还没有余力自建图床或承担图床 cdn 的费用<br>
+                  
+      
+    </span>
+    <div class="index-more-btn">
+      <a href="/2018/03/11/wow/#more" rel="contents">
+        阅读全文 &raquo;
+      </a>
+    </div>
+  </div>
+</article>
+
+    </div>
+    
+  
+    
+      <article class="post-c animated fadeInUp">
+  <div class="post-c-cover">        
+    <a href="/2018/03/11/old-article/" itemprop="url">
+      <img src="/ui/img/pop-pipi.png" />
+    </a>
+  </div>
+  <div class="post-c-info">
+    <div class="post-c-date">
+      <i class="far fa-calendar-alt"></i>
+      
+      <time title="更新于" itemprop="dateModified" datetime="2018-03-11T21:00:00+08:00">
+        2018-03-11
+      </time>
+      
+    </div>
+    <div class="post-c-title">  
+      <a href="/2018/03/11/old-article/" itemprop="url">
+        <h1>旧-hexo主题制作资料</h1>
+      </a>
+    </div>
+    <div class="post-c-statistics">
+    
+    </div>
+    <span>
+      
+        
+          <p>这是一篇旧文章，主要讲解了如何在 hexo 新建一个自定义页面<br>
+                
+      
+    </span>
+    <div class="index-more-btn">
+      <a href="/2018/03/11/old-article/#more" rel="contents">
+        阅读全文 &raquo;
+      </a>
+    </div>
+  </div>
+</article>
+
+    
+  
+    
+      <article class="post-c animated fadeInUp">
+  <div class="post-c-cover">        
+    <a href="/2018/03/11/test/" itemprop="url">
+      <img src="/ui/img/mei.png" />
+    </a>
+  </div>
+  <div class="post-c-info">
+    <div class="post-c-date">
+      <i class="far fa-calendar-alt"></i>
+      
+      <time title="更新于" itemprop="dateModified" datetime="2018-03-11T00:00:00+08:00">
+        2018-03-11
+      </time>
+      
+    </div>
+    <div class="post-c-title">  
+      <a href="/2018/03/11/test/" itemprop="url">
+        <h1>测试 Hello World</h1>
+      </a>
+    </div>
+    <div class="post-c-statistics">
+    
+    </div>
+    <span>
+      
+        
+          
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
+Quick
+          ...
+                
+      
+    </span>
+    <div class="index-more-btn">
+      <a href="/2018/03/11/test/#more" rel="contents">
+        阅读全文 &raquo;
+      </a>
+    </div>
+  </div>
+</article>
+
+    
+  
+  <div class="post-more-btn text-center">
+    <a class="btn" href="/archives/">
+      更多文章
+    </a>
+  </div>
+</section>
+
+          </div>
+          
+
+        </div>
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<div class="made-with-love">
+  <span>Made with<i class="fas fa-heart"></i>by</span>
+  <a href="https://github.com/umrons" target="_blank">
+    <span>Umrons</span>
+  </a>
+</div>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="author" itemprop="copyrightHolder">umrons</span>
+<br>
+<div class="powered-by">
+  由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动.
+  &nbsp;托管于 <a href="https://github.com/umrons" target="_blank">Github</a>.
+</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+  <div class="top-cat back-to-top" id="top-cat"></div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.4"></script>
+
+
+
+  
+  
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.4"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script src="/ui/js/ui.min.js"></script>  
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/index.min.js"></script>  
+  <script>
+    var slideout = new Slideout({
+      'panel': document.getElementById('panel'),
+      'menu': document.getElementById('menu'),
+      'padding': 256,
+      'tolerance': 70
+    });
+
+    // Toggle button
+    document.querySelector('.toggle-button').addEventListener('click', function() {
+      slideout.toggle();
+    });
+    function close(eve) {
+      eve.preventDefault();
+      slideout.close();
+    }
+    slideout
+    .on('beforeopen', function() {
+      this.panel.classList.add('panel-open');
+    })
+    .on('open', function() {
+      this.panel.addEventListener('click', close);
+    })
+    .on('beforeclose', function() {
+      this.panel.classList.remove('panel-open');
+      this.panel.removeEventListener('click', close);
+    });
+  </script>
+</body>
+</html>

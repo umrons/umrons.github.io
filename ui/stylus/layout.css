@@ -1,0 +1,35 @@
+* {
+  box-sizing: border-box;
+}
+a:hover {
+  color: #fad448;
+  border: none;
+}
+.main-inner {
+  min-height: calc(100vh - 200px);
+}
+.post-meta-c time {
+  font-size: 16px;
+}
+_::-webkit-full-page-media,
+_:future,
+:root .isSafari {
+  -webkit-animation: none !important;
+  position: relative;
+}
+@media (max-width: 767.98px) {
+  .isPC {
+    display: none;
+  }
+  .isMobile {
+    display: block;
+  }
+}
+@media (min-width: 768px) {
+  .isPC {
+    display: block;
+  }
+  .isMobile {
+    display: none;
+  }
+}
