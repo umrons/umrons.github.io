@@ -118,6 +118,6 @@ function setbg (div1, div2) {
         bgan2.innerHTML = `${bg[i].author}`
       }, 2000)
     }
-  }, 10000)
+  }, 20000)
 }
 }()
