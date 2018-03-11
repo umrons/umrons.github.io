@@ -11,11 +11,13 @@ a:hover {
 .post-meta-c time {
   font-size: 16px;
 }
+.isSafari {
+  position: relative;
+}
 _::-webkit-full-page-media,
 _:future,
 :root .isSafari {
   -webkit-animation: none !important;
-  position: relative;
 }
 @media (max-width: 767.98px) {
   .isPC {

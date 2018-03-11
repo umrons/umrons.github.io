@@ -1820,7 +1820,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #b416f2;
+  background: #4261ff;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3290,11 +3290,13 @@ a:hover {
 .post-meta-c time {
   font-size: 16px;
 }
+.isSafari {
+  position: relative;
+}
 _::-webkit-full-page-media,
 _:future,
 :root .isSafari {
   -webkit-animation: none !important;
-  position: relative;
 }
 @media (max-width: 767.98px) {
   .isPC {
