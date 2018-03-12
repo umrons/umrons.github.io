@@ -11,6 +11,17 @@
   color: #000;
   border: none;
 }
+.powered-by-inner {
+  display: inline-block;
+}
+@media (max-width: 767.98px) {
+  .main {
+    padding-bottom: 200px;
+  }
+  .footer {
+    padding: 0 15vw;
+  }
+}
 @media (min-width: 768px) {
   .footer {
     position: relative;

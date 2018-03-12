@@ -1820,7 +1820,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #b65890;
+  background: #ff7f25;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2897,6 +2897,17 @@ embed {
 .made-with-love a {
   color: #000;
   border: none;
+}
+.powered-by-inner {
+  display: inline-block;
+}
+@media (max-width: 767.98px) {
+  .main {
+    padding-bottom: 200px;
+  }
+  .footer {
+    padding: 0 15vw;
+  }
 }
 @media (min-width: 768px) {
   .footer {
