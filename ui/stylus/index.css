@@ -27,18 +27,28 @@
   width: 304px;
   height: 171px;
   margin: 0 auto;
-  border-radius: 20px;
-  overflow: hidden;
+  border-radius: 20px !important;
+  overflow: hidden !important;
   border: none;
+  webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
 }
 .plan-inner .plan-img a img {
+  position: relative;
   width: 304px;
   height: 171px;
+  overflow: hidden !important;
   object-fit: cover;
   transition: all 0.75s ease;
 }
 .plan-inner .plan-img a img:hover {
   transform: scale(1.15);
+  -webkit-transform: scale(1.15);
+  -webkit-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
 }
 .plan-inner ul {
   flex: 1;

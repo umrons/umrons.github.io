@@ -1820,7 +1820,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #997f46;
+  background: #e791d6;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2736,16 +2736,6 @@ embed {
   body {
     background-color: #fe9;
     background-image: url("/ui/img/bg01.png");
-    animation: loopBgInfos 15s linear infinite;
-    -webkit-animation: loopBgInfos 15s linear infinite;
-  }
-}
-@-webkit-keyframes loopBgInfos {
-  0% {
-    background-position: 0 0;
-  }
-  to {
-    background-position: 180px -270px;
   }
 }
 @-moz-keyframes loopBgInfos {
@@ -3079,13 +3069,19 @@ embed {
   width: 304px;
   height: 171px;
   margin: 0 auto;
-  border-radius: 20px;
-  overflow: hidden;
+  border-radius: 20px !important;
+  overflow: hidden !important;
   border: none;
+  webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
 }
 .plan-inner .plan-img a img {
+  position: relative;
   width: 304px;
   height: 171px;
+  overflow: hidden !important;
   object-fit: cover;
   transition: all 0.75s ease;
 }
@@ -3095,6 +3091,10 @@ embed {
   -ms-transform: scale(1.15);
   -o-transform: scale(1.15);
   transform: scale(1.15);
+  -webkit-transform: scale(1.15);
+  -webkit-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
 }
 .plan-inner ul {
   flex: 1;
