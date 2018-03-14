@@ -17,13 +17,6 @@
 
 
 
-  
-  
-    
-    
-  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
-  <link href="/lib/pace/pace-theme-loading-bar.min.css?v=1.0.2" rel="stylesheet">
-
 
 
 
@@ -123,7 +116,7 @@
 <meta property="og:image" content="http://umrons.me/postImg/vue-router-note/lazy-before-admin.png">
 <meta property="og:image" content="http://umrons.me/postImg/vue-router-note/lazy-after-index.png">
 <meta property="og:image" content="http://umrons.me/postImg/vue-router-note/lazy-after-admin.png">
-<meta property="og:updated_time" content="2018-03-14T16:03:10.368Z">
+<meta property="og:updated_time" content="2018-03-14T16:11:04.131Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="超简单的 vue-router 懒加载">
 <meta name="twitter:description" content="没想到在 vue-cli 上实现路由懒加载如此简单，但同时，也要注意一些细节问题 本文案例：两个页面分别引入了不同的 ui 框架，导致样式冲突">
@@ -390,10 +383,10 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'vue'</span></span><br><span class="line"><span class="keyword">import</span> Router <span class="keyword">from</span> <span class="string">'vue-router'</span></span><br><span class="line"><span class="comment">// import index from '@/pages/index'</span></span><br><span class="line"><span class="comment">// import admin from '@/pages/admin'</span></span><br><span class="line"><span class="keyword">const</span> index = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/pages/index'</span>)</span><br><span class="line"><span class="keyword">const</span> admin = <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'@/pages/admin'</span>)</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
 <p>这样就 ok 了！</p>
 <p>然后把两个冲突的 ui 框架从 <code>src/main.js</code> 分别移动到两个页面的 <code>&lt;script&gt;&lt;/script&gt;</code> 内（如果不做路由懒加载只做这一步，最后依旧共用一个打包好的 js 文件）</p>
-<h2 id="测试一下效果"><a href="#测试一下效果" class="headerlink" title="测试一下效果"></a>测试一下效果</h2><h3 id="路由懒加载前："><a href="#路由懒加载前：" class="headerlink" title="路由懒加载前："></a>路由懒加载前：</h3><p><img src="/postImg/vue-router-note/lazy-before-index.png" alt="路由懒加载前 index"></p>
+<h2 id="测试一下效果"><a href="#测试一下效果" class="headerlink" title="测试一下效果"></a>测试一下效果</h2><h3 id="路由懒加载前"><a href="#路由懒加载前" class="headerlink" title="路由懒加载前"></a>路由懒加载前</h3><p><img src="/postImg/vue-router-note/lazy-before-index.png" alt="路由懒加载前 index"></p>
 <p>页面二</p>
 <p><img src="/postImg/vue-router-note/lazy-before-admin.png" alt="路由懒加载前 admin"></p>
-<h3 id="路由懒加载后："><a href="#路由懒加载后：" class="headerlink" title="路由懒加载后："></a>路由懒加载后：</h3><p>此时输入框已恢复正常</p>
+<h3 id="路由懒加载后"><a href="#路由懒加载后" class="headerlink" title="路由懒加载后"></a>路由懒加载后</h3><p>此时输入框已恢复正常</p>
 <p><img src="/postImg/vue-router-note/lazy-after-index.png" alt="路由懒加载后 index"></p>
 <p>页面二</p>
 <p><img src="/postImg/vue-router-note/lazy-after-admin.png" alt="路由懒加载后 admin"></p>
