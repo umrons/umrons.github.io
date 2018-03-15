@@ -104,18 +104,18 @@
   <meta name="keywords" content="JavaScript," />
 
 
-<meta name="description" content="我们在 html 中使用&amp;lt;style&amp;gt;引入 js 文件时，是同步操作，会按顺序执行，在引入基于 jquery 的 ui 框架时经常遇到 但是在 js 代码中使用 document.createElement(‘script’) 是属于异步操作，如果要按顺序加载则需要有回调函数">
+<meta name="description" content="我们在 html 中使用 &amp;lt;style&amp;gt; 引入 js 文件时，是同步操作，会按顺序执行，在引入基于 jquery 的 ui 框架时经常遇到。但是在 js 代码中使用 document.createElement(&amp;#39;script&amp;#39;) 是属于异步操作，如果要按顺序加载则需要有回调函数">
 <meta name="keywords" content="JavaScript">
 <meta property="og:type" content="article">
 <meta property="og:title" content="同步加载 js 文件">
 <meta property="og:url" content="http://umrons.me/2018/03/15/getScript/index.html">
 <meta property="og:site_name" content="Umrons">
-<meta property="og:description" content="我们在 html 中使用&amp;lt;style&amp;gt;引入 js 文件时，是同步操作，会按顺序执行，在引入基于 jquery 的 ui 框架时经常遇到 但是在 js 代码中使用 document.createElement(‘script’) 是属于异步操作，如果要按顺序加载则需要有回调函数">
+<meta property="og:description" content="我们在 html 中使用 &amp;lt;style&amp;gt; 引入 js 文件时，是同步操作，会按顺序执行，在引入基于 jquery 的 ui 框架时经常遇到。但是在 js 代码中使用 document.createElement(&amp;#39;script&amp;#39;) 是属于异步操作，如果要按顺序加载则需要有回调函数">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-15T16:16:18.000Z">
+<meta property="og:updated_time" content="2018-03-15T16:23:23.900Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="同步加载 js 文件">
-<meta name="twitter:description" content="我们在 html 中使用&amp;lt;style&amp;gt;引入 js 文件时，是同步操作，会按顺序执行，在引入基于 jquery 的 ui 框架时经常遇到 但是在 js 代码中使用 document.createElement(‘script’) 是属于异步操作，如果要按顺序加载则需要有回调函数">
+<meta name="twitter:description" content="我们在 html 中使用 &amp;lt;style&amp;gt; 引入 js 文件时，是同步操作，会按顺序执行，在引入基于 jquery 的 ui 框架时经常遇到。但是在 js 代码中使用 document.createElement(&amp;#39;script&amp;#39;) 是属于异步操作，如果要按顺序加载则需要有回调函数">
 
 
 
@@ -365,10 +365,12 @@
       
 
       
-        <p>我们在 html 中使用<code>&lt;style&gt;</code>引入 js 文件时，是同步操作，会按顺序执行，在引入基于 jquery 的 ui 框架时经常遇到</p>
-<p>但是在 js 代码中使用 document.createElement(‘script’) 是属于异步操作，如果要按顺序加载则需要有回调函数<br><a id="more"></a></p>
+        <p>我们在 html 中使用 <code>&lt;style&gt;</code> 引入 js 文件时，是同步操作，会按顺序执行，在引入基于 jquery 的 ui 框架时经常遇到。但是在 js 代码中使用 <code>document.createElement(&#39;script&#39;)</code> 是属于异步操作，如果要按顺序加载则需要有回调函数<br><a id="more"></a></p>
 <p>类似 jquery 中的 <code>getScript()</code></p>
-<h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">getScript (source, callback) &#123;</span><br><span class="line">  <span class="keyword">let</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>)</span><br><span class="line">  script.async = <span class="number">1</span></span><br><span class="line">  script.onload = script.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params">_, isAbort</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (isAbort || !script.readyState || <span class="regexp">/loaded|complete/</span>.test(script.readyState)) &#123;</span><br><span class="line">      script.onload = script.onreadystatechange = <span class="literal">null</span></span><br><span class="line">      script = <span class="literal">undefined</span></span><br><span class="line">      <span class="keyword">if</span> (!isAbort) &#123;</span><br><span class="line">        <span class="comment">// console.log(`$&#123;source&#125; success`)</span></span><br><span class="line">        <span class="keyword">if</span> (callback) &#123;</span><br><span class="line">          callback()</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  script.src = source</span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(script)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h2><ul>
+<li>未找到 jquery 中 <code>getScript()</code> 的源码，这是类似方法</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">getScript (source, callback) &#123;</span><br><span class="line">  <span class="keyword">let</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>)</span><br><span class="line">  script.async = <span class="number">1</span></span><br><span class="line">  script.onload = script.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params">_, isAbort</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (isAbort || !script.readyState || <span class="regexp">/loaded|complete/</span>.test(script.readyState)) &#123;</span><br><span class="line">      script.onload = script.onreadystatechange = <span class="literal">null</span></span><br><span class="line">      script = <span class="literal">undefined</span></span><br><span class="line">      <span class="keyword">if</span> (!isAbort) &#123;</span><br><span class="line">        <span class="comment">// console.log(`$&#123;source&#125; success`)</span></span><br><span class="line">        <span class="keyword">if</span> (callback) &#123;</span><br><span class="line">          callback()</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  script.src = source</span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(script)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
