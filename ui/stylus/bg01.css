@@ -1,5 +1,5 @@
 @media (min-width: 768px) {
-  body {
+  .container {
     background-color: #fe9;
     background-image: url("/ui/img/bg01.png");
   }

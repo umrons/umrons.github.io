@@ -101,27 +101,28 @@
 
 
   
-  <meta name="keywords" content="Hi, Umrons" />
+  <meta name="keywords" content="JavaScript," />
 
 
-<meta name="description" content="Don&apos;t lose your courage">
-<meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="http://umrons.me/categories/index.html">
+<meta name="description" content="我们在 html 中使用&amp;lt;style&amp;gt;引入 js 文件时，是同步操作，会按顺序执行，在引入基于 jquery 的 ui 框架时经常遇到 但是在 js 代码中使用 document.createElement(‘script’) 是属于异步操作，如果要按顺序加载则需要有回调函数">
+<meta name="keywords" content="JavaScript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="同步加载 js 文件">
+<meta property="og:url" content="http://umrons.me/2018/03/15/getScript/index.html">
 <meta property="og:site_name" content="Umrons">
-<meta property="og:description" content="Don&apos;t lose your courage">
+<meta property="og:description" content="我们在 html 中使用&amp;lt;style&amp;gt;引入 js 文件时，是同步操作，会按顺序执行，在引入基于 jquery 的 ui 框架时经常遇到 但是在 js 代码中使用 document.createElement(‘script’) 是属于异步操作，如果要按顺序加载则需要有回调函数">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-03-09T07:11:01.839Z">
+<meta property="og:updated_time" content="2018-03-15T16:16:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="categories">
-<meta name="twitter:description" content="Don&apos;t lose your courage">
+<meta name="twitter:title" content="同步加载 js 文件">
+<meta name="twitter:description" content="我们在 html 中使用&amp;lt;style&amp;gt;引入 js 文件时，是同步操作，会按顺序执行，在引入基于 jquery 的 ui 框架时经常遇到 但是在 js 代码中使用 document.createElement(‘script’) 是属于异步操作，如果要按顺序加载则需要有回调函数">
 
 
 
 
 
 
-  <link rel="canonical" href="http://umrons.me/categories/"/>
+  <link rel="canonical" href="http://umrons.me/2018/03/15/getScript/"/>
 
 
 
@@ -130,7 +131,7 @@
     sidebar: "",
   };
 </script>
-  <title>categories | Umrons</title>
+  <title>同步加载 js 文件 | Umrons</title>
   
 
 
@@ -245,9 +246,7 @@
 
 <div class="header-mobile">
   
-    
-  
-  <i class="fas fa-bars toggle-button i-666" aria-hidden="true"></i>
+  <i class="fas fa-bars toggle-button " aria-hidden="true"></i>
 </div>
 
 <div class="menu-item" style="display:none!important;">
@@ -266,98 +265,170 @@
 
   <div id="posts" class="posts-expand">
     
-    
-    
-    <div class="post-block page">
-      <header class="post-header">
 
-<h1 class="post-title" itemprop="name headline">categories</h1>
+  
 
-<div class="post-meta">
+  
   
   
 
+  
 
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://umrons.me/2018/03/15/getScript/">
 
-</div>
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="umrons">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
 
-</header>
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Umrons">
+    </span>
 
-      
-      
-      
-      <div class="post-body">
+    
+      <header class="post-header post-header-c" style="background-image: url('/ui/img/YuruCamp08.png')">
+        <div class="post-header-inner">
         
         
-          <div class="category-all-page">
-            <div class="category-all-title">
-                
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                目前共计 3 个分类
-            </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/blog/">blog</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/代码片段/">代码片段</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/测试/">测试</a><span class="category-list-count">1</span></li></ul>
-            </div>
-            <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                  
-                    
-                  
-                
-                目前共计 6 个标签
-            </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/JavaScript/" style="font-size: 16px; color: #bbb">JavaScript</a> <a href="/tags/Vue/" style="font-size: 16px; color: #bbb">Vue</a> <a href="/tags/主题/" style="font-size: 30px; color: #111">主题</a> <a href="/tags/公告/" style="font-size: 16px; color: #bbb">公告</a> <a href="/tags/旧文章/" style="font-size: 16px; color: #bbb">旧文章</a> <a href="/tags/路由/" style="font-size: 16px; color: #bbb">路由</a>
-            </div>
-          </div>
-          </div>
+          <h1 class="post-title" itemprop="name headline">同步加载 js 文件</h1>
         
+
+        <div class="post-meta post-meta-c">
+          <img src="/images/avatar.png" alt="头像" />
+          <span>UMRONS</span>
+          <span class="post-time"></span>
+          <span class="post-meta-divider">·</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar-alt"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-15T23:29:27+08:00">2018-03-15</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">·</span>
+            
+            
+              
+                <span class="post-meta-item-text amend-left">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/代码片段/" itemprop="url" rel="index"><span itemprop="name">代码片段</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>我们在 html 中使用<code>&lt;style&gt;</code>引入 js 文件时，是同步操作，会按顺序执行，在引入基于 jquery 的 ui 框架时经常遇到</p>
+<p>但是在 js 代码中使用 document.createElement(‘script’) 是属于异步操作，如果要按顺序加载则需要有回调函数<br><a id="more"></a></p>
+<p>类似 jquery 中的 <code>getScript()</code></p>
+<h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">getScript (source, callback) &#123;</span><br><span class="line">  <span class="keyword">let</span> script = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>)</span><br><span class="line">  script.async = <span class="number">1</span></span><br><span class="line">  script.onload = script.onreadystatechange = <span class="function"><span class="keyword">function</span> (<span class="params">_, isAbort</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (isAbort || !script.readyState || <span class="regexp">/loaded|complete/</span>.test(script.readyState)) &#123;</span><br><span class="line">      script.onload = script.onreadystatechange = <span class="literal">null</span></span><br><span class="line">      script = <span class="literal">undefined</span></span><br><span class="line">      <span class="keyword">if</span> (!isAbort) &#123;</span><br><span class="line">        <span class="comment">// console.log(`$&#123;source&#125; success`)</span></span><br><span class="line">        <span class="keyword">if</span> (callback) &#123;</span><br><span class="line">          callback()</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  script.src = source</span><br><span class="line">  <span class="built_in">document</span>.body.appendChild(script)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
+
     
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/14/vue-router-note/" rel="next" title="超简单的 vue-router 懒加载">
+                <i class="fas fa-chevron-left"></i> 超简单的 vue-router 懒加载
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
 
 
 
-    
-    
-    
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -511,9 +582,9 @@
   
     <script type="text/javascript">
       var disqus_config = function () {
-        this.page.url = 'http://umrons.me/categories/index.html';
-        this.page.identifier = 'categories/index.html';
-        this.page.title = 'categories';
+        this.page.url = 'http://umrons.me/2018/03/15/getScript/';
+        this.page.identifier = '2018/03/15/getScript/';
+        this.page.title = '同步加载 js 文件';
       };
       function loadComments () {
         var d = document, s = d.createElement('script');
