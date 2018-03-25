@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+<link href="/css/main.css?v=6.0.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.0.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=6.0.4" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.0.4',
+    sidebar: {"position":"left","display":"remove","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="Koa2,Egg.js,Session," />
+
+
+<meta name="description" content="没想到 ctx.session 对开发者也是无感知的，真厉害">
+<meta name="keywords" content="Koa2,Egg.js,Session">
+<meta property="og:type" content="article">
+<meta property="og:title" content="神奇的 ctx.session">
+<meta property="og:url" content="http://umrons.me/2018/03/25/session/index.html">
+<meta property="og:site_name" content="Umrons">
+<meta property="og:description" content="没想到 ctx.session 对开发者也是无感知的，真厉害">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://umrons.me/postImg/session/error1.png">
+<meta property="og:image" content="http://umrons.me/postImg/session/login1.png">
+<meta property="og:image" content="http://umrons.me/postImg/session/error2-1.png">
+<meta property="og:image" content="http://umrons.me/postImg/session/error2-2.png">
+<meta property="og:image" content="http://umrons.me/postImg/session/update.png">
+<meta property="og:image" content="http://umrons.me/postImg/session/result.png">
+<meta property="og:image" content="http://umrons.me/ui/img/Sawamura.png">
+<meta property="og:updated_time" content="2018-03-25T14:25:48.644Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="神奇的 ctx.session">
+<meta name="twitter:description" content="没想到 ctx.session 对开发者也是无感知的，真厉害">
+<meta name="twitter:image" content="http://umrons.me/postImg/session/error1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://umrons.me/2018/03/25/session/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>神奇的 ctx.session | Umrons</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115536898-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115536898-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome-animation@0.2.0/dist/font-awesome-animation.min.css">
+  
+  
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+  <div id="menu">
+    <div class="slide-menu isMobile">
+  <div class="menu-author">
+    <img src="/images/avatar.png" alt="头像" />
+    <span>Umrons</span>
+  </div>
+  <div class="menu-inner">
+    <div style="padding-bottom: 100px">
+      <a href="/" rel="section">
+        <i class="fas fa-home"></i><span>主页</span>
+      </a>
+      <a href="/categories/" rel="section">
+        <i class="fas fa-th-list"></i><span>分类</span>
+      </a>
+      <a href="/archives/" rel="section">
+        <i class="fas fa-history"></i><span>归档</span>
+      </a>
+      <a href="/about/" rel="section">
+        <i class="fas fa-info"></i><span>关于</span>
+      </a>
+      <a href="https://github.com/umrons" target="_blank">
+        <i class="fab fa-github"></i><span>GitHub</span>
+      </a>
+    </div>      
+  </div>
+</div>
+  </div>
+  <div class="container sidebar-position-left page-post-detail" id="panel">
+
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="header-pc" id="header-pc">
+  <div class="left">
+    <div class="site-title-c">
+      <ruby class="">UMR<rp>(</rp><rt>umaru</rt><rp>)</rp></ruby>ons
+    </div>
+  </div>
+  <div class="right">  
+    <div class="site-nav-c animated fadeIn">
+      <a href="/" class="underline-from-center faa-parent animated-hover" rel="section">
+        <i class="fas fa-home faa-pulse"></i>主页
+      </a>
+      <a href="/categories/" class="underline-from-center faa-parent animated-hover" rel="section">
+        <i class="fas fa-th-list faa-tada"></i>分类
+      </a>
+      <a href="/archives/" class="underline-from-center faa-parent animated-hover" rel="section">
+        <i class="fas fa-history faa-ring"></i>归档
+      </a>
+      <a href="/about/" class="underline-from-center faa-parent animated-hover" rel="section">
+        <i class="fas fa-info faa-bounce"></i>关于
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="header-mobile">
+  
+  <i class="fas fa-bars toggle-button " aria-hidden="true"></i>
+</div>
+
+<div class="menu-item" style="display:none!important;">
+</div>
+    </header>
+
+    
+    <div class="header-blank"></div>
+    
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://umrons.me/2018/03/25/session/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="umrons">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Umrons">
+    </span>
+
+    
+      <header class="post-header post-header-c" style="background-image: url('/ui/img/DagashiKashi2-09.png')">
+        <div class="post-header-inner">
+        
+        
+          <h1 class="post-title" itemprop="name headline">神奇的 ctx.session</h1>
+        
+
+        <div class="post-meta post-meta-c">
+          <img src="/images/avatar.png" alt="头像" />
+          <span>UMRONS</span>
+          <span class="post-time"></span>
+          <span class="post-meta-divider">·</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar-alt"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-25T20:41:07+08:00">2018-03-25</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">·</span>
+            
+            
+              
+                <span class="post-meta-item-text amend-left">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/代码片段/" itemprop="url" rel="index"><span itemprop="name">代码片段</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>没想到 ctx.session 对开发者也是无感知的，真厉害<br><a id="more"></a></p>
+<h2 id="关于-Session"><a href="#关于-Session" class="headerlink" title="关于 Session"></a>关于 Session</h2><p>因为 http 是无连接的，所以我们要用 Cookies 和 Session 使会话持久化</p>
+<p>常见的方案有：</p>
+<ul>
+<li><p>把用户信息加密存进 Cookies (Session) 里</p>
+</li>
+<li><p>Cookies 里只存放 SessionID，后端根据 SessionID 在 内存/数据库 中取出用户信息</p>
+</li>
+</ul>
+<p>当然，我倾向于使用 SessionID 的解决方案</p>
+<h2 id="Egg-js-中的运用"><a href="#Egg-js-中的运用" class="headerlink" title="Egg.js 中的运用"></a>Egg.js 中的运用</h2><p>Egg.js 内置了 Session 插件<br>此外，我还使用了插件 <code>egg-redis</code> 和 <code>egg-session-redis</code></p>
+<p>案例：用户登陆后，再次访问时保持登陆状态</p>
+<ul>
+<li>错误示范一:</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> checkUserLogin(key) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; app &#125; = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">if</span> (key &amp;&amp; app.sessionStore.get(key)) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里我不知道 SessionID 是什么，随便先用 <code>ctx.session</code> 试试</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> checkLoginAndGetUser() &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; ctx, app &#125; = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">const</span> code0 = &#123;</span><br><span class="line">    code: <span class="number">0</span>,</span><br><span class="line">    message: <span class="string">'用户已登陆'</span>,</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">const</span> code1 = &#123;</span><br><span class="line">    code: <span class="number">1</span>,</span><br><span class="line">    message: <span class="string">'用户未登陆'</span>,</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">if</span> (ctx.session.email &amp;&amp; ctx.service.user.checkUserLogin(ctx.session)) &#123;</span><br><span class="line">    <span class="keyword">const</span> userEmail = app.sessionStore.get(ctx.session).email;</span><br><span class="line">    <span class="keyword">const</span> user = <span class="keyword">await</span> ctx.model.User.findOne(&#123; <span class="attr">email</span>: userEmail &#125;);</span><br><span class="line">    code0.user = &#123;&#125;;</span><br><span class="line">    code0.session = &#123;&#125;; <span class="comment">// 测试用</span></span><br><span class="line">    code0.user.email = user.email;</span><br><span class="line">    code0.session = app.sessionStore.get(ctx.session); <span class="comment">// 测试用</span></span><br><span class="line">    ctx.body = code0;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  ctx.body = code1;</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在用户未登陆状态下直接报错（此时无 Cookies/Session）：</p>
+<p><img src="/postImg/session/error1.png" alt="错误示范一"></p>
+<p>每当看到这种错误，第一反应应该是 try catch 把错误抛出解决，但是这里不适用</p>
+<p>这里的主要问题是，Session 不存在，但是 <code>if (ctx.session)</code> 却生效了，原因大致能猜到，其实在 Egg.js 的<a href="https://eggjs.org/zh-cn/core/cookie-and-session.html#延长用户-session-有效期" target="_blank" rel="noopener">文档</a>中就有写明</p>
+<p>这里面有一句 <code>if (!ctx.session.populated) return;</code></p>
+<p>一开始我不理解 <code>.populated</code> 为什么要写出来，经过这个错误我懂了 =͟͟͞͞(꒪⌓꒪*)</p>
+<p>其实就是判断的时候要把 <code>ctx.session</code> 中的一个属性写出来，比如我生成 Session 的时候把用户邮箱写进去了，那么就应该是 <code>if (ctx.session.email)</code>，改正后出现第二个错误</p>
+<p>至于那个 <code>code0.user = {}</code> 是必须的，否则报错：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">TypeError</span>: Cannot read property <span class="string">'email'</span> <span class="keyword">of</span> <span class="literal">null</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>错误示范二:</li>
+</ul>
+<p>修改错误一后问题依旧，目测是 Redis 里查不出用户 Session，所以应该是<code>app.sessionStore.get(key)</code> 的 <code>key</code> 不存在。</p>
+<p>那么我们直接试试 <code>ctx.session.email</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> checkLoginAndGetUser() &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; ctx, app &#125; = <span class="keyword">this</span>;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">if</span> (ctx.session.email &amp;&amp; ctx.service.user.checkUserLogin(ctx.session)) &#123;</span><br><span class="line">    <span class="keyword">const</span> user = <span class="keyword">await</span> ctx.model.User.findOne(&#123; <span class="attr">email</span>: ctx.session.email &#125;);</span><br><span class="line">    code0.user = &#123;&#125;;</span><br><span class="line">    code0.session = &#123;&#125;;</span><br><span class="line">    code0.user.email = user.email;</span><br><span class="line">    code0.session = app.sessionStore.get(ctx.session);</span><br><span class="line">    ctx.body = code0;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  ctx.body = code1;</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>登陆再刷新试一下<br><img src="/postImg/session/login1.png" alt="登陆123123"></p>
+<p>Redis 中已有数据</p>
+<p><img src="/postImg/session/error2-1.png" alt="错误示范2.1"></p>
+<p><code>ctx.session.email</code> 成功获取用户邮箱，但是在 Redis 里查不出用户 Session，证明了上述猜测</p>
+<p>那么问题来了，没有去 Redis 里面取用户数据，却能在 <code>ctx.session</code> 中取到，难道用户数据已经存在了 Cookies 中？</p>
+<p>这时，我换了个浏览器，登陆了第二个用户</p>
+<p><img src="/postImg/session/error2-2.png" alt="错误示范2.2"></p>
+<p>好像是这么一回事呢，那我怎么和 Redis 里面的数据做匹配呢？</p>
+<h2 id="正解"><a href="#正解" class="headerlink" title="正解"></a>正解</h2><p>上面都是开玩笑的啦，怎么可能会在 Cookies 和 Redis 中保存两次用户 Session 数据这么愚蠢的做法呢</p>
+<p>改变 Redis 中的一个数据试试</p>
+<p><img src="/postImg/session/update.png" alt="update"></p>
+<p>报错 <code>TypeError: Cannot read property &#39;email&#39; of null</code></p>
+<p>打印一下 <code>ctx.session.email</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (ctx.session.email &amp;&amp; ctx.service.user.checkUserLogin(ctx.session)) &#123;</span><br><span class="line">  <span class="comment">// const user = await ctx.model.User.findOne(&#123; email: ctx.session.email &#125;);</span></span><br><span class="line">  <span class="comment">// code0.user = &#123;&#125;;</span></span><br><span class="line">  <span class="comment">// code0.session = &#123;&#125;;</span></span><br><span class="line">  <span class="comment">// code0.user.email = user.email;</span></span><br><span class="line">  code0.session = ctx.session;</span><br><span class="line">  ctx.body = code0;</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/postImg/session/result.png" alt="result"></p>
+<p>可见，<code>ctx.session</code> 的用户数据并不是放在 Cookies 中的，而是在 Redis 里！根本不需要写代码去 Redis 里取数据！框架和插件自动完成！</p>
+<hr>
+<p>删除纠结了一晚上的代码，实现了功能</p>
+<p><img src="/ui/img/Sawamura.png" alt="英梨梨"></p>
+<p>所以最终代码应该是这样的</p>
+<p>从 Redis 取数据 <code>checkUserLogin()</code> 不需要了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> checkLoginAndGetUser() &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; ctx &#125; = <span class="keyword">this</span>;</span><br><span class="line">  <span class="keyword">const</span> code0 = &#123;</span><br><span class="line">    code: <span class="number">0</span>,</span><br><span class="line">    message: <span class="string">'用户已登陆'</span>,</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">const</span> code1 = &#123;</span><br><span class="line">    code: <span class="number">1</span>,</span><br><span class="line">    message: <span class="string">'用户未登陆'</span>,</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="keyword">if</span> (ctx.session.email) &#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> user = <span class="keyword">await</span> ctx.model.User.findOne(&#123; <span class="attr">email</span>: ctx.session.email &#125;);</span><br><span class="line">      code0.user = &#123;&#125;;</span><br><span class="line">      code0.user.email = user.email;</span><br><span class="line">      ...</span><br><span class="line">      ctx.body = code0;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">      ctx.body = code1;</span><br><span class="line">      <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  ctx.body = code1;</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Koa2/" rel="tag"># Koa2</a>
+          
+            <a href="/tags/Egg-js/" rel="tag"># Egg.js</a>
+          
+            <a href="/tags/Session/" rel="tag"># Session</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/16/socket/" rel="next" title="Socket.io!">
+                <i class="fas fa-chevron-left"></i> Socket.io!
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<div class="made-with-love">
+  <span>Made with<i class="fas fa-heart"></i>by</span>
+  <a href="https://github.com/umrons" target="_blank">
+    <span>Umrons</span>
+  </a>
+</div>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="author" itemprop="copyrightHolder">umrons</span>
+<br>
+<div class="powered-by">
+  <div class="powered-by-inner">
+    由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动.&nbsp;
+  </div>
+  <div class="powered-by-inner">
+    托管于 <a href="https://github.com/umrons" target="_blank">Github</a>.&nbsp;
+  </div>
+  <div class="powered-by-inner">
+    部署于 <a href="https://www.netlify.com" target="_blank">Netlify</a>.&nbsp;
+  </div>
+  <br>
+  <div class="powered-by-inner">
+    <a href="https://www.google.com/intl/zh-CN/analytics/" target="_blank">Google Analytics</a> 提供网站分析服务.&nbsp;
+  </div>
+</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+  <div class="top-cat back-to-top" id="top-cat"></div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.4"></script>
+
+
+
+  
+
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'http://umrons.me/2018/03/25/session/';
+        this.page.identifier = '2018/03/25/session/';
+        this.page.title = '神奇的 ctx.session';
+      };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://umrons.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script>
+  
+
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script src="/ui/js/ui.min.js"></script>  
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js"></script>  
+  <script>
+    var slideout = new Slideout({
+      'panel': document.getElementById('panel'),
+      'menu': document.getElementById('menu'),
+      'padding': 256,
+      'tolerance': 70
+    });
+
+    // Toggle button
+    document.querySelector('.toggle-button').addEventListener('click', function() {
+      slideout.toggle();
+    });
+    function close(eve) {
+      eve.preventDefault();
+      slideout.close();
+    }
+    slideout
+    .on('beforeopen', function() {
+      this.panel.classList.add('panel-open');
+    })
+    .on('open', function() {
+      this.panel.addEventListener('click', close);
+    })
+    .on('beforeclose', function() {
+      this.panel.classList.remove('panel-open');
+      this.panel.removeEventListener('click', close);
+    });
+  </script>
+</body>
+</html>

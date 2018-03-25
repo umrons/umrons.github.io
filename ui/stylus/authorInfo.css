@@ -44,8 +44,8 @@
     background-color: #fff;
     z-index: 10;
     border-radius: 50%;
-    -webkit-animation: imgBorder 10s linear;
-    animation: imgBorder 10s linear;
+    -webkit-animation: imgBorder 6s linear;
+    animation: imgBorder 6s linear;
   }
   .user-info-pc .user-avatar .border-top .border-top-inner,
   .user-info-pc .user-avatar .border-bottom .border-top-inner {
