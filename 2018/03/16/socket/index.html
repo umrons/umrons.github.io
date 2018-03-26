@@ -373,7 +373,7 @@
 </li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// &#123;app_root&#125;/config/config.$&#123;env&#125;.js</span></span><br><span class="line"></span><br><span class="line">connectionMiddleware: [ <span class="string">'connection'</span> ],</span><br><span class="line"><span class="comment">// 连接成功会自动调用该中间件</span></span><br></pre></td></tr></table></figure>
-<h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"/static/socket.io.js"</span>&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">const</span> socket = io(<span class="string">'/'</span>, &#123;</span><br><span class="line">  path: <span class="string">'/socket'</span> <span class="comment">//这里和 nginx 要匹配</span></span><br><span class="line">&#125;);</span><br><span class="line">socket.on(<span class="string">'connect'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'connect!'</span>);</span><br><span class="line">&#125;)</span><br><span class="line">...</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="前端"><a href="#前端" class="headerlink" title="前端"></a>前端</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=<span class="string">"/static/socket.io.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="keyword">const</span> socket = io(<span class="string">'/'</span>, &#123;</span><br><span class="line">  path: <span class="string">'/socket'</span> <span class="comment">//这里和 nginx 要匹配</span></span><br><span class="line">&#125;);</span><br><span class="line">socket.on(<span class="string">'connect'</span>, () =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'connect!'</span>);</span><br><span class="line">&#125;)</span><br><span class="line">...</span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
 <p>开发环境直接 <code>const socket = io(&#39;0.0.0.0:7001/&#39;)</code></p>
 <h2 id="Nginx"><a href="#Nginx" class="headerlink" title="Nginx"></a>Nginx</h2><p>网上的 example 都是访问主页或者不含 Nginx 的配置，而我们前后端分离使用 Nginx 时就要一些骚操作</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">location ^~ /socket/ &#123;</span><br><span class="line">    proxy_set_header Upgrade $http_upgrade;</span><br><span class="line">    proxy_set_header Connection &quot;upgrade&quot;;</span><br><span class="line">    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;</span><br><span class="line">    proxy_set_header Host $host;</span><br><span class="line">    proxy_pass   http://127.0.0.1:7001/socket.io/;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -493,6 +493,9 @@
   </div>
   <div class="powered-by-inner">
     部署于 <a href="https://www.netlify.com" target="_blank">Netlify</a>.&nbsp;
+  </div>
+  <div class="powered-by-inner">
+    <a href="https://www.cloudflare.com/" target="_blank">Cloudflare</a> 提供 CDN 服务.&nbsp;
   </div>
   <br>
   <div class="powered-by-inner">
@@ -672,7 +675,7 @@
       'padding': 256,
       'tolerance': 70
     });
-
+    slideout.disableTouch();
     // Toggle button
     document.querySelector('.toggle-button').addEventListener('click', function() {
       slideout.toggle();

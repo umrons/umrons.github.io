@@ -500,6 +500,9 @@
   <div class="powered-by-inner">
     部署于 <a href="https://www.netlify.com" target="_blank">Netlify</a>.&nbsp;
   </div>
+  <div class="powered-by-inner">
+    <a href="https://www.cloudflare.com/" target="_blank">Cloudflare</a> 提供 CDN 服务.&nbsp;
+  </div>
   <br>
   <div class="powered-by-inner">
     <a href="https://www.google.com/intl/zh-CN/analytics/" target="_blank">Google Analytics</a> 提供网站分析服务.&nbsp;
@@ -678,7 +681,7 @@
       'padding': 256,
       'tolerance': 70
     });
-
+    slideout.disableTouch();
     // Toggle button
     document.querySelector('.toggle-button').addEventListener('click', function() {
       slideout.toggle();

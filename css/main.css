@@ -1820,7 +1820,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ab6954;
+  background: #6fff39;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -2893,7 +2893,7 @@ embed {
 }
 @media (max-width: 767.98px) {
   .main {
-    padding-bottom: 200px;
+    padding-bottom: 250px;
   }
   .footer {
     padding: 0 15vw;
