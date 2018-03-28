@@ -105,6 +105,9 @@
   -o-transition: all 0.3s ease-out;
   transition: all 0.3s ease-out;
 }
+.cc {
+  text-align: center;
+}
 @media (max-width: 767.98px) {
   .post-header-c,
   .post-header-c:before {

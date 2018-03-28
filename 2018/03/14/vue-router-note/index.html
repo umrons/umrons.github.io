@@ -116,7 +116,7 @@
 <meta property="og:image" content="http://umrons.me/postImg/vue-router-note/lazy-before-admin.png">
 <meta property="og:image" content="http://umrons.me/postImg/vue-router-note/lazy-after-index.png">
 <meta property="og:image" content="http://umrons.me/postImg/vue-router-note/lazy-after-admin.png">
-<meta property="og:updated_time" content="2018-03-26T07:47:08.337Z">
+<meta property="og:updated_time" content="2018-03-27T13:51:07.989Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="超简单的 vue-router 懒加载">
 <meta name="twitter:description" content="没想到在 vue-cli 上实现路由懒加载如此简单，但同时，也要注意一些细节问题 本文案例：两个页面分别引入了不同的 ui 框架，导致样式冲突">
@@ -395,9 +395,10 @@
 <ul>
 <li><p><del>如果使用上述懒加载的方式解决该问题，子组件依旧可以使用该页引入的 ui 框架</del> 弃用，该方法在页面后退时容易发生样式重叠，尽量不要在 <code>&lt;script&gt;</code> 内引入css</p>
 </li>
-<li><p>如果样式放在<code>&lt;style scoped&gt;&lt;/style&gt;</code>内，但又想让其影响子组件，则需要<strong>深度作用选择器</strong> <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">``` html</span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">.a &gt;&gt;&gt; .b &#123; /* ... */ &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure></p>
+<li><p>如果样式放在<code>&lt;style scoped&gt;&lt;/style&gt;</code>内，但又想让其影响子组件，则需要<a href="https://vue-loader.vuejs.org/zh-cn/features/scoped-css.html" target="_blank" rel="noopener">深度作用选择器</a> <code>&gt;&gt;&gt;</code></p>
 </li>
 </ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">.a &gt;&gt;&gt; .b &#123; /* ... */ &#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <p>上述代码将会编译成：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.a</span><span class="selector-attr">[data-v-f3f3eg9]</span> <span class="selector-class">.b</span> &#123; <span class="comment">/* ... */</span> &#125;</span><br></pre></td></tr></table></figure>
 
@@ -424,6 +425,12 @@
           
             <a href="/tags/路由/" rel="tag"># 路由</a>
           
+        </div>
+      
+
+      
+        <div class="cc">
+          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a>
         </div>
       
 

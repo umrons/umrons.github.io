@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+<link href="https://use.fontawesome.com/releases/v5.0.7/css/all.css" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+<link href="/css/main.css?v=6.0.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=6.0.4">
+
+
+  <link rel="mask-icon" href="/images/favicon.ico?v=6.0.4" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.0.4',
+    sidebar: {"position":"left","display":"remove","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="JavaScript,技巧," />
+
+
+<meta name="description" content="本文介绍：try catch 与 async await 的组合技、try catch 中的 return 陷阱、不使用 try catch 导出 async await 错误的解决方案。">
+<meta name="keywords" content="JavaScript,技巧">
+<meta property="og:type" content="article">
+<meta property="og:title" content="try catch 与 async await 的组合技">
+<meta property="og:url" content="http://umrons.me/2018/03/28/tryCatchAwait/index.html">
+<meta property="og:site_name" content="Umrons">
+<meta property="og:description" content="本文介绍：try catch 与 async await 的组合技、try catch 中的 return 陷阱、不使用 try catch 导出 async await 错误的解决方案。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://umrons.me/postImg/try-catch-await/advantage.png">
+<meta property="og:image" content="http://umrons.me/postImg/try-catch-await/sequence.png">
+<meta property="og:image" content="http://umrons.me/postImg/try-catch-await/return.png">
+<meta property="og:updated_time" content="2018-03-28T08:01:02.662Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="try catch 与 async await 的组合技">
+<meta name="twitter:description" content="本文介绍：try catch 与 async await 的组合技、try catch 中的 return 陷阱、不使用 try catch 导出 async await 错误的解决方案。">
+<meta name="twitter:image" content="http://umrons.me/postImg/try-catch-await/advantage.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://umrons.me/2018/03/28/tryCatchAwait/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>try catch 与 async await 的组合技 | Umrons</title>
+  
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-115536898-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-115536898-1');
+</script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome-animation@0.2.0/dist/font-awesome-animation.min.css">
+  
+  
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+  <div id="menu">
+    <div class="slide-menu isMobile">
+  <div class="menu-author">
+    <img src="/images/avatar.png" alt="头像" />
+    <span>Umrons</span>
+  </div>
+  <div class="menu-inner">
+    <div style="padding-bottom: 100px">
+      <a href="/" rel="section">
+        <i class="fas fa-home"></i><span>主页</span>
+      </a>
+      <a href="/categories/" rel="section">
+        <i class="fas fa-th-list"></i><span>分类</span>
+      </a>
+      <a href="/archives/" rel="section">
+        <i class="fas fa-history"></i><span>归档</span>
+      </a>
+      <a href="/about/" rel="section">
+        <i class="fas fa-info"></i><span>关于</span>
+      </a>
+      <a href="https://github.com/umrons" target="_blank">
+        <i class="fab fa-github"></i><span>GitHub</span>
+      </a>
+    </div>      
+  </div>
+</div>
+  </div>
+  <div class="container sidebar-position-left page-post-detail" id="panel">
+
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="header-pc" id="header-pc">
+  <div class="left">
+    <div class="site-title-c">
+      <ruby class="">UMR<rp>(</rp><rt>umaru</rt><rp>)</rp></ruby>ons
+    </div>
+  </div>
+  <div class="right">  
+    <div class="site-nav-c animated fadeIn">
+      <a href="/" class="underline-from-center faa-parent animated-hover" rel="section">
+        <i class="fas fa-home faa-pulse"></i>主页
+      </a>
+      <a href="/categories/" class="underline-from-center faa-parent animated-hover" rel="section">
+        <i class="fas fa-th-list faa-tada"></i>分类
+      </a>
+      <a href="/archives/" class="underline-from-center faa-parent animated-hover" rel="section">
+        <i class="fas fa-history faa-ring"></i>归档
+      </a>
+      <a href="/about/" class="underline-from-center faa-parent animated-hover" rel="section">
+        <i class="fas fa-info faa-bounce"></i>关于
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="header-mobile">
+  
+  <i class="fas fa-bars toggle-button " aria-hidden="true"></i>
+</div>
+
+<div class="menu-item" style="display:none!important;">
+</div>
+    </header>
+
+    
+    <div class="header-blank"></div>
+    
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://umrons.me/2018/03/28/tryCatchAwait/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="umrons">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Umrons">
+    </span>
+
+    
+      <header class="post-header post-header-c" style="background-image: url('/ui/img/Ryuo'sWork12.png')">
+        <div class="post-header-inner">
+        
+        
+          <h1 class="post-title" itemprop="name headline">try catch 与 async await 的组合技</h1>
+        
+
+        <div class="post-meta post-meta-c">
+          <img src="/images/avatar.png" alt="头像" />
+          <span>UMRONS</span>
+          <span class="post-time"></span>
+          <span class="post-meta-divider">·</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar-alt"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-28T00:49:46+08:00">2018-03-28</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">·</span>
+            
+            
+              
+                <span class="post-meta-item-text amend-left">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/代码片段/" itemprop="url" rel="index"><span itemprop="name">代码片段</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文介绍：try catch 与 async await 的组合技、try catch 中的 return 陷阱、不使用 try catch 导出 async await 错误的解决方案。</p>
+<a id="more"></a>
+<p>在使用 Express 的时候，经常会碰到 <a href="http://callbackhell.com" target="_blank" rel="noopener">Callback Hell</a> 和 <a href="https://oren.github.io/blog/zalgo.html" target="_blank" rel="noopener">release Zalgo</a> 两大难题，事实上，这两个问题已经困扰 Node.js 开发者多年。</p>
+<p>而在 koa2 中，这两大问题已经有很好的解决方案，那就是 <code>async function</code></p>
+<h2 id="async-function"><a href="#async-function" class="headerlink" title="async function"></a>async function</h2><p><code>async function</code> 这个官方解决方案于 ECMAScript 2017 中发布，并在 Node.js 8 中实现。</p>
+<p>我们看一下 <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await" target="_blank" rel="noopener">MDN</a> 上面的描述：</p>
+<blockquote>
+<p>The await expression causes async function execution to pause until  a Promise is fulfilled, that is resolved or rejected, and to resume execution of the async function after fulfillment. When resumed, the value of the await expression is that of the fulfilled Promise.<br>If the Promise is rejected, the await expression throws the rejected value.<br>If the value of the expression following the await operator is not a Promise, it’s converted to a resolved Promise.</p>
+</blockquote>
+<p>先用 Express 举一个简单的例子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">users.findOne(&#123; <span class="attr">email</span>: form.email &#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err, user</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(err)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err);</span><br><span class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>(!user)&#123;</span><br><span class="line">    res.json(&#123;</span><br><span class="line">      code: <span class="number">1</span>,</span><br><span class="line">      msg: <span class="string">'用户不存在'</span></span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    orders.findOne(&#123; <span class="attr">id</span>: user.orderID &#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err, order</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span>(err)&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(err);</span><br><span class="line">      &#125;<span class="keyword">else</span> <span class="keyword">if</span>(!order)&#123;</span><br><span class="line">        res.json(&#123;</span><br><span class="line">          code: <span class="number">2</span>,</span><br><span class="line">          msg: <span class="string">'订单不存在'</span></span><br><span class="line">        &#125;);</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>这里只是举个简单的例子，而代码已经往 <a href="http://callbackhell.com" target="_blank" rel="noopener">Callback Hell</a> 发展了，虽然可以使用 <code>promise</code> 进行优化，但仍然不够完美，现在我们再来看一下 <code>async function</code> 是怎么解决的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> code1 = &#123;</span><br><span class="line">  code: <span class="number">1</span>,</span><br><span class="line">  msg: <span class="string">'用户不存在'</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> code2 = &#123;</span><br><span class="line">  code: <span class="number">2</span>,</span><br><span class="line">  msg: <span class="string">'订单不存在'</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> user = <span class="keyword">await</span> users.findOne(&#123; <span class="attr">email</span>: form.email &#125;)</span><br><span class="line"><span class="keyword">const</span> order = <span class="literal">null</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!user) &#123;</span><br><span class="line">  ctx.body = code1</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> order = <span class="keyword">await</span> orders.findOne(&#123; <span class="attr">id</span>: user.orderID &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!order) &#123;</span><br><span class="line">  ctx.body = code2</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么问题来了，<code>error</code> 怎么抛出，这时候就轮到 <code>try catch</code> 出场了</p>
+<h2 id="配合-try-catch"><a href="#配合-try-catch" class="headerlink" title="配合 try catch"></a>配合 try catch</h2><h3 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> code1 = &#123;</span><br><span class="line">  code: <span class="number">1</span>,</span><br><span class="line">  msg: <span class="string">'用户不存在'</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> code2 = &#123;</span><br><span class="line">  code: <span class="number">2</span>,</span><br><span class="line">  msg: <span class="string">'订单不存在'</span>,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> order = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> user = <span class="keyword">await</span> users.findOne(&#123; <span class="attr">email</span>: form.email &#125;);</span><br><span class="line">  <span class="keyword">if</span> (!user) &#123;</span><br><span class="line">    ctx.body = code1;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> order = <span class="keyword">await</span> orders.findOne(&#123; <span class="attr">id</span>: user.orderID &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(e);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (!order) &#123;</span><br><span class="line">  ctx.body = code2;</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>如果把上述两个业务逻辑进行封装，会有更好的效果，参考 Egg.js 的 <a href="https://eggjs.org/zh-cn/basics/service.html" target="_blank" rel="noopener">Service</a></strong></p>
+<h3 id="另一个好处"><a href="#另一个好处" class="headerlink" title="另一个好处"></a>另一个好处</h3><p>并且，使用 <code>try catch</code> 还有另一个好处，如果 <code>await</code> 抛出了一个错误，则在 <code>try</code> 中的后续代码不会执行</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">!<span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'这个会被执行'</span>)</span><br><span class="line">    <span class="keyword">await</span> errorFunc()</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'这个不会被执行'</span>)</span><br><span class="line">  &#125; <span class="keyword">catch</span> (e) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(e)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;()</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">errorFunc</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">throw</span> <span class="string">'hello error'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="/postImg/try-catch-await/advantage.png" alt="运行结果"></p>
+<h2 id="return-陷阱"><a href="#return-陷阱" class="headerlink" title="return 陷阱"></a>return 陷阱</h2><ul>
+<li><code>retrun</code> 在 <code>try</code> 块中</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">!<span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> x = <span class="number">1</span></span><br><span class="line">  x = <span class="keyword">await</span> add(x)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`最后的x: <span class="subst">$&#123;x&#125;</span>`</span>)</span><br><span class="line">&#125;()</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'执行 try'</span>);</span><br><span class="line">    <span class="keyword">return</span> ++x</span><br><span class="line">  &#125; <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'没有错误，catch 不会执行'</span>)</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'执行 finally'</span>)</span><br><span class="line">    ++x</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`finally 中的x: <span class="subst">$&#123;x&#125;</span>`</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>finally 子句在 <code>try</code> 块和 <code>catch</code> 块之后并且在下一个 <code>try</code> 声明之前执行。无论是否有异常抛出或着是否被捕获它总是执行。</p>
+</blockquote>
+<p>在这里我们需要注意的是<strong>代码执行顺序</strong>，<code>add(x)</code> 会等待 <code>finally</code> 执行完再返回 <code>try</code> 中的 <code>return</code>，但 <code>finally</code> 中对 <code>x</code> 的操作不会影响返回结果</p>
+<p><img src="/postImg/try-catch-await/sequence.png" alt="运行结果"></p>
+<ul>
+<li><code>return</code> 在 <code>try</code> 与 <code>finally</code> 中均有</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">!<span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> x = <span class="number">1</span></span><br><span class="line">  x = <span class="keyword">await</span> add(x)</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`最后的x: <span class="subst">$&#123;x&#125;</span>`</span>)</span><br><span class="line">&#125;()</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'执行 try'</span>);</span><br><span class="line">    <span class="keyword">return</span> ++x</span><br><span class="line">  &#125; <span class="keyword">catch</span>(e) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'没有错误，catch 不会执行'</span>)</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'执行 finally'</span>)</span><br><span class="line">    ++x</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`finally 中的x: <span class="subst">$&#123;x&#125;</span>`</span>)</span><br><span class="line">    <span class="keyword">return</span> x</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果从finally块中返回一个值，那么这个值将会成为整个try-catch-finally的返回值，无论是否有return语句在try和catch中。这包括在catch块里抛出的异常。</p>
+</blockquote>
+<p><img src="/postImg/try-catch-await/return.png" alt="运行结果"></p>
+<h2 id="await-to-js"><a href="#await-to-js" class="headerlink" title="await-to-js"></a>await-to-js</h2><p>如果你不想使用 try catch 处理错误，也可以用这个插件 <a href="https://github.com/scopsy/await-to-js" target="_blank" rel="noopener">await-to-js</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/技巧/" rel="tag"># 技巧</a>
+          
+        </div>
+      
+
+      
+        <div class="cc">
+          <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" target="_blank">署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0)</a>
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/25/session/" rel="next" title="神奇的 ctx.session">
+                <i class="fas fa-chevron-left"></i> 神奇的 ctx.session
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        
+<div class="made-with-love">
+  <span>Made with<i class="fas fa-heart"></i>by</span>
+  <a href="https://github.com/umrons" target="_blank">
+    <span>Umrons</span>
+  </a>
+</div>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="author" itemprop="copyrightHolder">umrons</span>
+<br>
+<div class="powered-by">
+  <div class="powered-by-inner">
+    由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动.&nbsp;
+  </div>
+  <div class="powered-by-inner">
+    托管于 <a href="https://github.com/umrons" target="_blank">Github</a>.&nbsp;
+  </div>
+  <div class="powered-by-inner">
+    部署于 <a href="https://www.netlify.com" target="_blank">Netlify</a>.&nbsp;
+  </div>
+  <div class="powered-by-inner">
+    <a href="https://www.cloudflare.com/" target="_blank">Cloudflare</a> 提供 CDN 服务.&nbsp;
+  </div>
+  <br>
+  <div class="powered-by-inner">
+    <a href="https://www.google.com/intl/zh-CN/analytics/" target="_blank">Google Analytics</a> 提供网站分析服务.&nbsp;
+  </div>
+</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+  <div class="top-cat back-to-top" id="top-cat"></div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.4"></script>
+
+
+
+  
+
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'http://umrons.me/2018/03/28/tryCatchAwait/';
+        this.page.identifier = '2018/03/28/tryCatchAwait/';
+        this.page.title = 'try catch 与 async await 的组合技';
+      };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://umrons.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script>
+  
+
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script src="/ui/js/ui.min.js"></script>  
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js"></script>  
+  <script>
+    var slideout = new Slideout({
+      'panel': document.getElementById('panel'),
+      'menu': document.getElementById('menu'),
+      'padding': 256,
+      'tolerance': 70
+    });
+    slideout.disableTouch();
+    // Toggle button
+    document.querySelector('.toggle-button').addEventListener('click', function() {
+      slideout.toggle();
+    });
+    function close(eve) {
+      eve.preventDefault();
+      slideout.close();
+    }
+    slideout
+    .on('beforeopen', function() {
+      this.panel.classList.add('panel-open');
+    })
+    .on('open', function() {
+      this.panel.addEventListener('click', close);
+    })
+    .on('beforeclose', function() {
+      this.panel.classList.remove('panel-open');
+      this.panel.removeEventListener('click', close);
+    });
+  </script>
+</body>
+</html>
